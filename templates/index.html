@@ -1,0 +1,31 @@
+
+    {% with messages = get_flashed_messages()%}
+        {% if messages %}
+            {%for message in messages %}
+                {{message}}
+            {% endfor%}
+        {% endif %}
+
+    {% endwith %}
+
+    <form action="/new" method="POST">
+        <input type = "text" name = 'nombreHamburguesa' placeholder="escriba el nombre de la hamburguesa"/>
+        <input type = "number" name = 'precioHamburguesa' placeholder="escriba el precio de la hamburguesa"/>
+        <input type = "text" name = 'urlHamburguesa' placeholder="escriba el url de la hamburguesa"/>
+        <button>save</button>
+    </form>
+
+    <div>
+        {% for burga in burgas%}
+        <h3>{{burga.nombreHamburguesa}</h3>
+        <div>
+            <a href="{{url_for('burgas.update', id=burgas.id) }}">Update</a>             <!-- url_for('ubicacion.funcion') linkea con la funcion en vez de la url de la funcion-->
+            <a href="{{url_for('burgas.delete', id=burgas.id) }}">Delete</a>              <!-- y se Le asigna la id del contacto al link-->
+        </div>
+        <p>{{burga.precioHamburguesa}}</p>
+        <p>{{burga.urlHamburguesa}}</p>
+        <img src=`{{burga.urlHamburguesa}}` width="100px" height="100px">
+        
+        {% endfor %}
+    
+    </div>
